@@ -1,0 +1,29 @@
+<br>
+<br>
+
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2><b>Rewards Received</b></h2>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <tbody>
+        <% if @rewards.present? %>
+          <% @rewards.each do |reward| %>
+            <tr>
+              <td><%= reward.name %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan='3' class="test-position"> No Rewards Found</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
