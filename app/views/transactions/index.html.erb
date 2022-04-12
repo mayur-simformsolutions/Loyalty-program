@@ -26,7 +26,7 @@
           <% @transactions.each do |transaction| %>
             <tr>
               <td><%= transaction.amount %></td>
-              <td><%= transaction.created_at %></td>
+              <td><%= transaction.created_at.strftime('%F') %></td>
               
               <td>
                 <%= transaction.amount/100 *10 %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :set_transaction, only: %i[show edit update destroy]
 
   # GET /transactions
   def index
@@ -26,7 +26,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
         UpdateLoyaltyPointsJob.perform_later(current_user.id, @transaction.id)
-        format.html { redirect_to transactions_path, notice: "Transaction was successfully created." }
+        format.html { redirect_to transactions_path, notice: 'Transaction was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -37,7 +37,7 @@ class TransactionsController < ApplicationController
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
-        format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
+        format.html { redirect_to transaction_url(@transaction), notice: 'Transaction was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -49,7 +49,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: "Transaction was successfully destroyed." }
+      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
     end
   end
 

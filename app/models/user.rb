@@ -11,5 +11,4 @@ class User < ApplicationRecord
   has_many :rewards, through: :user_rewards
 
   DEFAULT_COUNTRY = 'India'
-
 end

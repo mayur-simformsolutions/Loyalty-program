@@ -5,7 +5,7 @@ class CashRebatesJob < ApplicationJob
 
   def perform
     users = User.joins(:transactions).group(:id).having('count(transactions.amount > 100) > 10').select("users.id as user_id, #{reward_id} as reward_id").as_json
-    UserReward.create(users)  
+    UserReward.first_or_create(users)
   end
 
   def reward_id
