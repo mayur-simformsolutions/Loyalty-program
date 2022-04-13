@@ -15,9 +15,10 @@ rewards = [{ name: '5% Cash Rebate' },
 
 Reward.create(rewards)
 
-# Creating 10 test users
-create_list :user, 10
+# Creating 20 test users
+create_list :user, 10, :default_country
+
+create_list :user, 10, :other_country
 
 # Creating 10 transactions for the users
 create_list :transaction, 10, user_id: user.id
-

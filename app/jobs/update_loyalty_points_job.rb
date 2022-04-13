@@ -25,13 +25,14 @@ class UpdateLoyaltyPointsJob < ApplicationJob
     loyalty_tier =
       case user.loyalty_points
       when 0...1000
-        'Standard'
+        'standard'
       when 1000...5000
-        'Gold'
+        'gold'
       else
-        'Platinum'
+        'platinum'
       end
     user.update(loyalty_tier: loyalty_tier)
+    AirportLoungeRewardsJob.perform_later(user.id) if user.gold?
   end
 
   # Generating loyalty points based on country and rule set

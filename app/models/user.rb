@@ -16,5 +16,5 @@ class User < ApplicationRecord
 
   DEFAULT_COUNTRY = 'India'
 
-  enum loyalty_tier: { Standard: 0, Gold: 1, Platinum: 2 }
+  enum loyalty_tier: { standard: 0, gold: 1, platinum: 2 }
 end

@@ -9,7 +9,7 @@ FactoryBot.define do
     password { Faker::Internet.password }
   end
 
-  trait :india do
+  trait :default_country do
     country { 'India' }
   end
 

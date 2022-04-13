@@ -10,12 +10,6 @@ movie_rewards_job:
   class: "MovieRewardsJob"
   queue: default
 
-# Running AirportLoungeRewardsJob at every day at 2022-04-12 23:50:00 and next at 2022-04-13 23:50:00
-airport_lounge_rewards_job:
-  cron: "50 23 * * *"
-  class: "AirportLoungeRewardsJob"
-  queue: default
-
 # Running CashRebatesJob at every day at 2022-04-12 23:50:00 and next at 2022-04-13 23:50:00
 cash_rebates_job:
   cron: "50 23 * * *"
