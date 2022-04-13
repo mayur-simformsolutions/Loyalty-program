@@ -4,7 +4,7 @@ class UpdateLoyaltyPointsJob < ApplicationJob
   queue_as :default
 
   def perform(user_id, transaction_id)
-    user(user_id).update(loyalty_points: loyalty_points(user, transaction_amount(transaction_id)))
+    user(user_id).update(loyalty_points: loyalty_points(user(user_id), transaction_amount(transaction_id)))
   end
 
   def loyalty_points(user, transaction_amount)

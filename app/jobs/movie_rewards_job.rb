@@ -5,7 +5,7 @@ class MovieRewardsJob < ApplicationJob
 
   def perform
     users = User.joins(:transactions).where('users.created_at > ?',
-                                            DateTime.now - 2.months).group('users.id').select("MIN(transactions.created_at) as created_at, users.id as user_id, #{reward_id} as reward_id").where('transactions.amount > 10').as_json
+                                            DateTime.now - 2.months).group('users.id').select("MIN(transactions.created_at) as created_at, users.id as user_id, #{reward_id} as reward_id").where('transactions.amount >= 1000').as_json
     updated_users = remove_created_at(users)
     UserReward.first_or_create(updated_users)
   end

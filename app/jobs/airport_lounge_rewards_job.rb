@@ -4,7 +4,7 @@ class AirportLoungeRewardsJob < ApplicationJob
   queue_as :default
 
   def perform
-    users = User.where('loyalty_points > 1000').select("users.id as user_id, #{reward_id} as reward_id").as_json
+    users = User.where('loyalty_points >= 1000').select("users.id as user_id, #{reward_id} as reward_id").as_json
     UserReward.first_or_create(users)
   end
 

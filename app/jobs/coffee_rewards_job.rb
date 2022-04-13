@@ -4,7 +4,7 @@ class CoffeeRewardsJob < ApplicationJob
   queue_as :default
 
   def perform
-    users = User.where('loyalty_points > ? or extract(month from created_at) = ?', 100,
+    users = User.where('loyalty_points >= ? or extract(month from date_of_birth) = ?', 100,
                        DateTime.now.month).select("id as user_id, #{reward_id} as reward_id").as_json
     UserReward.first_or_create(users)
   end
