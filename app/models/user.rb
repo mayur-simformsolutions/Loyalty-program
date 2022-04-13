@@ -11,4 +11,15 @@ class User < ApplicationRecord
   has_many :rewards, through: :user_rewards
 
   DEFAULT_COUNTRY = 'India'
+
+  def loyalty_tier
+    case self.loyalty_points
+      when 0...1000
+        "Standard"
+      when 1000...5000
+        "Gold"
+      else
+        "Platinum"
+    end
+  end
 end

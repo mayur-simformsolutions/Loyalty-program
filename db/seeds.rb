@@ -1,6 +1,26 @@
 # frozen_string_literal: true
-require 'faker'
 
-# Creating test user
+require 'faker'
+include FactoryBot::Syntax::Methods
+
+# Creating test user used for login
 user = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: 'test@gmail.com', password: 'Simform@123',
-                   date_of_birth: Faker::Date.in_date_period)
+                   date_of_birth: Faker::Date.in_date_period, country: 'India')
+
+# Creating basic Rewards which can be used in the applications
+rewards = [{ name: '5% Cash Rebate' },
+           { name: 'Free Coffee_Reward' },
+           { name: 'Free Movie ticket' },
+           { name: 'Airport Lounge Access Reward' }]
+
+Reward.create(rewards)
+
+# Creating 10 test users
+create_list :user, 10
+
+# Creating 10 transactions for the users
+create_list :transaction, 10, user_id: user.id
+
+# Updating the loyalty points based on transactions in user
+loyalty_points = User.joins(:transactions).select('(transactions.amount/100) * 10 as loyalty_points').sum(&:loyalty_points)
+user.update(loyalty_points: loyalty_points)
