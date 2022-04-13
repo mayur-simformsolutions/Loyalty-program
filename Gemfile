@@ -26,11 +26,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# Used for scheduling background jobs
 gem 'sidekiq'
 gem 'sidekiq-cron', '~> 1.3'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
-
+# Used to fix the indendation of ruby code
 gem 'rubocop'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -51,7 +52,9 @@ group :development, :test do
   gem 'faker'
   # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
+  # Used for running the test scripts
   gem 'rspec-rails', '~> 5.0.0'
+  # Used to automatically load factories
   gem 'factory_bot_rails'
 end
 

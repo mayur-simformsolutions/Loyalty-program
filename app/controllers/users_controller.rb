@@ -66,6 +66,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :country, :email, :date_of_birth)
   end
 
+  # Setting up current user in before action
   def set_current_user
     @user = current_user
   end

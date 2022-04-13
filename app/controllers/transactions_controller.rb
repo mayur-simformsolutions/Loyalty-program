@@ -25,7 +25,6 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        UpdateLoyaltyPointsJob.perform_later(current_user.id, @transaction.id)
         format.html { redirect_to transactions_path, notice: 'Transaction was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -21,6 +21,3 @@ create_list :user, 10
 # Creating 10 transactions for the users
 create_list :transaction, 10, user_id: user.id
 
-# Updating the loyalty points based on transactions in user
-loyalty_points = User.joins(:transactions).select('(transactions.amount/100) * 10 as loyalty_points').sum(&:loyalty_points)
-user.update(loyalty_points: loyalty_points)

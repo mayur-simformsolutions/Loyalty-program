@@ -9,17 +9,12 @@ class User < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_many :user_rewards, dependent: :destroy
   has_many :rewards, through: :user_rewards
+  has_many :user_points, dependent: :destroy
+
+  # Validation
+  validates_presence_of :first_name, :last_name, :country, :date_of_birth, :email
 
   DEFAULT_COUNTRY = 'India'
 
-  def loyalty_tier
-    case self.loyalty_points
-      when 0...1000
-        "Standard"
-      when 1000...5000
-        "Gold"
-      else
-        "Platinum"
-    end
-  end
+  enum loyalty_tier: { Standard: 0, Gold: 1, Platinum: 2 }
 end

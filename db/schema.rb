@@ -12,7 +12,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_412_165_034) do
+ActiveRecord::Schema.define(version: 2022_04_13_145001) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -30,12 +31,20 @@ ActiveRecord::Schema.define(version: 20_220_412_165_034) do
     t.index ['user_id'], name: 'index_transactions_on_user_id'
   end
 
+  create_table 'user_points', force: :cascade do |t|
+    t.integer 'point_earned'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'user_id', null: false
+    t.index ['user_id'], name: 'index_user_points_on_user_id'
+  end
+
   create_table 'user_rewards', force: :cascade do |t|
     t.bigint 'user_id'
     t.bigint 'reward_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index %w[user_id reward_id], name: 'index_user_rewards_on_user_id_and_reward_id', unique: true
+    t.index ['user_id', 'reward_id'], name: 'index_user_rewards_on_user_id_and_reward_id', unique: true
   end
 
   create_table 'users', force: :cascade do |t|
@@ -51,9 +60,11 @@ ActiveRecord::Schema.define(version: 20_220_412_165_034) do
     t.string 'reset_password_token'
     t.datetime 'reset_password_sent_at'
     t.datetime 'remember_created_at'
+    t.integer 'loyalty_tier', default: 0
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
   add_foreign_key 'transactions', 'users'
+  add_foreign_key 'user_points', 'users'
 end
